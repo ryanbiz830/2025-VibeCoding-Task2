@@ -191,11 +191,78 @@
         .section-about {
             background-color: var(--color-bg);
         }
-        .about-placeholder-box {
-            background-color: var(--color-surface);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px dashed var(--color-text-muted);
+        
+        /* About 區塊基礎樣式 */
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--color-text-muted);
+        }
+
+        /* 重點列表樣式 */
+        .about-list {
+            margin: 1.5rem 0 2rem 0;
+            border-left: 2px solid var(--color-surface);
+            padding-left: 1.5rem;
+        }
+        .about-list li {
+            position: relative;
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+        }
+        .about-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        /* 圖片容器 */
+        .about-img-wrapper {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            margin-top: 2rem;
+        }
+        .about-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .about-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* 按鈕群組 */
+        .about-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .about-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-block;
+            border: 1px solid transparent;
+        }
+        .about-btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-bg);
+        }
+        .about-btn-primary:hover {
+            background-color: var(--color-primary-hover);
+            color: white;
+        }
+        .about-btn-outline {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background-color: transparent;
+        }
+        .about-btn-outline:hover {
+            background-color: rgba(56, 189, 248, 0.1);
         }
         /* CSS:ABOUT-END */
 
@@ -263,7 +330,7 @@
                 font-size: 2.5rem;
             }
 
-            /* Hero 區平板以上改為左右排版（如果未來有雙欄需求） */
+            /* Hero 區平板以上改為左右排版 */
             .section-hero .container {
                 display: flex;
                 align-items: center;
@@ -279,6 +346,23 @@
             .hero-img-wrapper {
                 flex: 1;
                 margin-top: 0;
+            }
+
+            /* About 區 RWD 設定：左右雙欄 */
+            .about-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+                align-items: center;
+            }
+            
+            .about-img-wrapper {
+                margin-top: 0; /* 桌面版移除上方 margin */
+                order: 2;      /* 圖片在右（如果 HTML 是 img 在後則此行可選，這裡強制保險） */
+            }
+            
+            .about-text {
+                order: 1;      /* 文字在左 */
             }
 
             /* 導覽列 */
@@ -337,15 +421,35 @@
             <section id="about" class="section section-about" aria-labelledby="about-heading">
                 <div class="container">
                     <h2 id="about-heading" class="section-title">關於我</h2>
-                    <div class="about-placeholder-box">
-                        <p><strong>[ 這裡目前是 About 區的占位內容 ]</strong></p>
-                        <p>未來會使用 Section SDD Prompt 針對「關於我」進行詳細設計，包含個人背景、學經歷與職涯目標。</p>
-                        <p>開發者請注意：產生新的 section 程式碼後，請將其「整段」貼在 <code>SECTION:ABOUT-START</code> 與 <code>SECTION:ABOUT-END</code> 兩個註解中間，完全取代現在這一區。</p>
-                        <br>
-                        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600&auto=format&fit=crop" 
-                             alt="團隊協作與討論會議" 
-                             loading="lazy"
-                             style="border-radius: 8px;">
+                    
+                    <div class="about-grid">
+                        <div class="about-text">
+                            <p>
+                                嗨！我是目前身兼新創公司 Founder 與前端教學者的開發者。我專注於將複雜的商業邏輯轉化為直覺的用戶介面，同時也熱愛在讀書會中分享最新的前端技術與架構思維（如 Vue/React 生態系與效能優化）。
+                            </p>
+                            <p>
+                                擁有工程背景的我，其實更著迷於「商業策略」與「技術落地」的結合。我不只是寫程式，更重視如何透過技術解決真實問題。我的行事風格強調透明溝通、快速迭代，並熱愛在充滿不確定性的環境中，與團隊一起打造出具備市場價值的產品。
+                            </p>
+                            
+                            <ul class="about-list">
+                                <li>具備敏捷開發思維，能快速從 0 到 1 打造產品原型</li>
+                                <li>擅長跨部門溝通，精準連結商業需求與技術實作</li>
+                                <li>熱衷於建構可維護、高擴展性的前端系統架構</li>
+                            </ul>
+
+                            <div class="about-actions">
+                                <a href="#projects" class="about-btn about-btn-outline">查看作品集</a>
+                                <a href="#contact" class="about-btn about-btn-primary">聯絡我</a>
+                            </div>
+                        </div>
+
+                        <div class="about-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800&auto=format&fit=crop" 
+                                 alt="團隊策略會議與腦力激盪" 
+                                 loading="lazy"
+                                 width="800"
+                                 height="600">
+                        </div>
                     </div>
                 </div>
             </section>
